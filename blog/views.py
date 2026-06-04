@@ -91,3 +91,20 @@ def like_post(request, id):
 
 
     return redirect('', id=post.id)
+
+
+def post_create(request):
+    if request.method == 'POST':
+        form = PostForm(request.post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('')
+        
+    else:
+        form = PostForm()
+
+    return render(request, '', {'form' : form})
+
+
