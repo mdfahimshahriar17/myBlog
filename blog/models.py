@@ -27,7 +27,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     tag = models.ManyToManyField(Tag)
     view_count = models.PositiveBigIntegerField(default=0)
-    liked_user = models.ManyToManyField(User, related_name='liked_posts')
+    liked_users = models.ManyToManyField(User, related_name='liked_posts')
 
     def __str__(self):
          return self.title
