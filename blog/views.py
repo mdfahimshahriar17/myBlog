@@ -79,3 +79,15 @@ def post_details(request, id):
     post.view_count += 1
     post.save()
     return render(request,  '', context)
+
+
+def like_post(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if post.liked_users.filter(id=request.user.id):
+        post.liked_users.remove(request.user)
+    else:
+        post.liked_users
+
+
+    return redirect('', id=post.id)
