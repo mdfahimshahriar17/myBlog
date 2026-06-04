@@ -52,7 +52,7 @@ def post_details(request, id):
     post = get_object_or_404(Post, id=id)
 
     if request.method == 'POST':
-        comment_form = CommentForm(request.Post)
+        comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False) #database e save hobena
             comment.post = post
@@ -95,7 +95,7 @@ def like_post(request, id):
 
 def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.post)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -108,3 +108,20 @@ def post_create(request):
     return render(request, '', {'form' : form})
 
 
+def post_update(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post.save()
+            return redirect('', id=post.id)
+        
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, '', {'form' : form})
+
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    post.delete()
+    return redirect('')
