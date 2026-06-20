@@ -49,6 +49,7 @@ def post_list(request):
 
 
 def post_details(request, id):
+    # get_object_or_404() -> Expect 1 object, not found = 404
     post = get_object_or_404(Post, id=id)
 
     if request.method == 'POST':
@@ -63,7 +64,12 @@ def post_details(request, id):
     else:
         comment_form = CommentForm()
 
+    # post.comment_set.all()
+    # = Comment.objects.filter(post=post)
+    # If related_name is not set, Django uses the default: <model_name>_set
     comments = post.comment_set.all()
+    
+    # filter() -> Expect multiple objects, not found = empty QuerySet
     is_liked = post.liked_users.filter(id=request.user.id).exists()
     like_count = post.liked_users.count()
 
@@ -76,7 +82,9 @@ def post_details(request, id):
         'is_liked' : is_liked,
         'like_count' : like_count,
     }
+    #counting post view
     post.view_count += 1
+    # view_count updated → post.save() is required to update it in the database
     post.save()
     return render(request,  '', context)
 
