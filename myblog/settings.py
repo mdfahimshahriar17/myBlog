@@ -37,8 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    
+    #for rich text field
     'ckeditor',
+
+    #crispy for using bootstrap5 and forms
+    "crispy_forms",
+    "crispy_bootstrap5",
+    
+    #myapp
+    'blog',
+
+    
 ]
 
 MIDDLEWARE = [
