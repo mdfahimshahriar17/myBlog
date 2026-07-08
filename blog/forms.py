@@ -1,6 +1,6 @@
 from django import forms
 from .models import Post, Comment
-
+from django.contrib.auth.models import User
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -9,5 +9,26 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    model = Comment
-    fields = ['content']
+    class Meta:
+        model = Comment
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Write your comment...'
+            })
+        }
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'first_name' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'last_name' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'email' : forms.TextInput(attrs={'class' : 'form-control'}),
+
+        }
