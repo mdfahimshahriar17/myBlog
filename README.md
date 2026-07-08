@@ -1,4 +1,3 @@
-````md
 # Django Blog Application
 
 A simple and responsive Blog Management web application built with Django.  
@@ -85,7 +84,6 @@ myblog/
 │   ├── profile_page.png
 │   └── my_posts.png
 │
-├── db.sqlite3
 ├── manage.py
 ├── requirements.txt
 ├── README.md
@@ -321,4 +319,3 @@ Developed by Md Fahim Shahriar
 ## License
 
 This project is created for learning and academic practice purposes.
-````
